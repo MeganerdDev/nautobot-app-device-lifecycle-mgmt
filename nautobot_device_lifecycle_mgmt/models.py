@@ -191,7 +191,8 @@ class SoftwareLCM(PrimaryModel):
     documentation_url = models.URLField(blank=True, verbose_name="Documentation URL")
     long_term_support = models.BooleanField(verbose_name="Long Term Support", default=False)
     pre_release = models.BooleanField(verbose_name="Pre-Release", default=False)
-
+    object_tags = models.ManyToManyField(to="extras.Tag", related_name="+", blank=True)
+    
     csv_headers = [
         "device_platform",
         "version",
@@ -201,6 +202,7 @@ class SoftwareLCM(PrimaryModel):
         "documentation_url",
         "long_term_support",
         "pre_release",
+        "object_tags",
     ]
 
     class Meta:
@@ -232,6 +234,7 @@ class SoftwareLCM(PrimaryModel):
             self.documentation_url,
             self.long_term_support,
             self.pre_release,
+            ",".join(str(object_tag["slug"]) for object_tag in self.object_tags.values()),
         )
 
     objects = SoftwareLCMQuerySet.as_manager()
