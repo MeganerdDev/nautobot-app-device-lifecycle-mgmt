@@ -426,7 +426,7 @@ class ContractLCM(PrimaryModel):
     start = models.DateField(null=True, blank=True, verbose_name="Contract Start Date")
     end = models.DateField(null=True, blank=True, verbose_name="Contract End Date")
     cost = models.DecimalField(null=True, blank=True, decimal_places=2, max_digits=15, verbose_name="Contract Cost")
-    support_level = models.CharField(verbose_name="Support Level", max_length=64, blank=True, default="")
+    support_level = models.CharField(verbose_name="Support Level", max_length=255, blank=True, default="")
     currency = models.CharField(verbose_name="Currency", max_length=4, blank=True, default="")
     contract_type = models.CharField(verbose_name="Contract Type", max_length=32, blank=True, default="")
     devices = models.ManyToManyField(to="dcim.Device", related_name="device_contracts", blank=True)
